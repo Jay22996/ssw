@@ -95,7 +95,7 @@ function onListening() {
  */
 const config = {
   server: '192.168.29.90',
-  instanceName: 'SQLEXPRESS',
+  port: 1433,
   authentication: {
     type: 'default',
     options: {
@@ -104,16 +104,21 @@ const config = {
     }
   },
   options: {
-    encrypt: true, // Use this if you're connecting to Azure SQL
+    encrypt: true,
     database: 'jaydemo',
-    trustServerCertificate: true // Set this to true if you're using self-signed certificates
+    trustServerCertificate: true,
+    debug: {
+      packet: true,
+      data: true,
+      payload: true,
+      token: true,
+      log: true
+    }
   }
 };
 
 sql.connect(config).then(pool => {
   console.log('Connected to SQL Server');
-
-  // Save SQL pool to app for later use in your routes/controllers
   app.set('sql', pool);
 }).catch(err => {
   console.error('Error connecting to SQL Server:', err);

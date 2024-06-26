@@ -94,7 +94,7 @@ function onListening() {
  * Connect to SQL Server.
  */
 const config = {
-  server: '49.43.35.194',
+  server: '2405:201:200c:f065:7055:768e:5c06:918e',
   port: 1433,
   authentication: {
     type: 'default',

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
@@ -94,8 +92,8 @@ function onListening() {
  * Connect to SQL Server.
  */
 const config = {
-  server: 'parmarjay.zapto.org',
-  port: 1433,
+  server: '192.168.29.90', // Update with your server IP or hostname
+  port: 1433, // Default port for SQL Server
   authentication: {
     type: 'default',
     options: {
@@ -104,21 +102,17 @@ const config = {
     }
   },
   options: {
-    encrypt: true,
+    encrypt: true, // Use this if you're connecting to Azure SQL
     database: 'jaydemo',
-    trustServerCertificate: true,
-    debug: {
-      packet: true,
-      data: true,
-      payload: true,
-      token: true,
-      log: true
-    }
+    trustServerCertificate: true // Set this to true if you're using self-signed certificates
   }
 };
 
+
 sql.connect(config).then(pool => {
   console.log('Connected to SQL Server');
+
+  // Save SQL pool to app for later use in your routes/controllers
   app.set('sql', pool);
 }).catch(err => {
   console.error('Error connecting to SQL Server:', err);
